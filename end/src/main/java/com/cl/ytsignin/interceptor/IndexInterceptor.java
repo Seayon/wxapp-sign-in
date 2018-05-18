@@ -19,8 +19,8 @@ import java.io.PrintWriter;
 public class IndexInterceptor extends HandlerInterceptorAdapter {
 	private final static JSONObject UNAUTHORIZATION = new JSONObject();
 	static {
-		UNAUTHORIZATION.put("msg", "页面已过期，请重新进入页面");
-		UNAUTHORIZATION.put("code", -4001);
+		UNAUTHORIZATION.put("msg", "身份验证失败");
+		UNAUTHORIZATION.put("code", -4000);
 	}
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -28,19 +28,7 @@ public class IndexInterceptor extends HandlerInterceptorAdapter {
 		String requestUrl = request.getRequestURI();
 		String token = request.getHeader("Token");
 
-		//注入一个openid和用户信息测试使用，后期需要移除！！！
-		httpSession.setAttribute("openId","o03rW0hI3_njQw78qlZr1uDqhwl8");
-		httpSession.setAttribute("userInfo", JSONObject.parseObject("{\n" +
-				"\t\"openid\": \"o03rW0hI3_njQw78qlZr1uDqhwl8\",\n" +
-				"\t\"nickname\": \"Seayon | 阿阳\",\n" +
-				"\t\"sex\": \"1\",\n" +
-				"\t\"province\": \"关岛\",\n" +
-				"\t\"city\": \"CITY\",\n" +
-				"\t\"country\": \"中国\",\n" +
-				"\t\"headimgurl\": \"http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46\",\n" +
-				"\t\"privilege\": \"\",\n" +
-				"\t\"unionid\": \"o6_bmasdasdsad6_2sgVt7hMZOPfL\"\n" +
-				"}"));
+
 
 		//Token和Session两种验证方式，Token适用于小程序，Session适用于公众号的Web版本
 		if (httpSession.getAttribute("openId") != null || token != null) {

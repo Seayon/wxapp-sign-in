@@ -5,6 +5,8 @@ import com.cl.ytsignin.dao.po.Signevent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Version 1.0
  * @author: cl
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Service;
 public class SignEventService {
 	@Autowired
 	SigneventMapper signeventMapper;
-
+	public List<Signevent> getSignevent(String openId) {
+		return signeventMapper.selectByopenId(openId);
+	}
 	/**
 	 * 发起一个签到活动
 	 *

@@ -24,46 +24,26 @@
         <property name="suffix" value=".html"/>
     </bean>-->
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/admin/**"/>-->
-            <!--&lt;!&ndash;管理员的不拦截页面&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/admin/login"/>-->
-            <!--<mvc:exclude-mapping path="/admin/Auth"/>-->
-            <!--<mvc:exclude-mapping path="/resource/**"/>-->
-            <!--<mvc:exclude-mapping path="/**/**.if"/>-->
-            <!--<bean class="com.seayon.interceptor.AdminInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--&lt;!&ndash;普通用户页面拦截器&ndash;&gt;-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<mvc:exclude-mapping path="/admin/login"/>-->
-            <!--<mvc:exclude-mapping path="/index"/>-->
-            <!--<mvc:exclude-mapping path="/"/>-->
-            <!--<mvc:exclude-mapping path="/Auth"/>-->
-            <!--<mvc:exclude-mapping path="/oauth"/>-->
-            <!--&lt;!&ndash;Swagger2的访问排除，项目上线需要移除&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/WxService"/>-->
-            <!--<mvc:exclude-mapping path="/**/**.if"/>-->
-            <!--<mvc:exclude-mapping path="/swagger-resources/**"/>-->
-            <!--<mvc:exclude-mapping path="/v2/api-docs"/>-->
-            <!--<mvc:exclude-mapping path="/swagger*/**"/>-->
-            <!--<bean class="com.seayon.interceptor.IndexInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--&lt;!&ndash;需要绑定学生账户才能访问的页面&ndash;&gt;-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/grade"/>-->
-            <!--<mvc:mapping path="/grade/**"/>-->
-            <!--<mvc:mapping path="/course"/>-->
-            <!--<mvc:mapping path="/library/user/**"/>-->
-            <!--<mvc:mapping path="/library/password"/>-->
-            <!--<bean class="com.seayon.interceptor.StudentPageInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/library/user/**"/>-->
-            <!--<bean class="com.seayon.interceptor.LibraryInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+     <!--   <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            &lt;!&ndash;管理员的不拦截页面&ndash;&gt;
+            <mvc:exclude-mapping path="/admin/login"/>
+            <mvc:exclude-mapping path="/admin/Auth"/>
+            <mvc:exclude-mapping path="/resource/**"/>
+            <mvc:exclude-mapping path="/**/**.if"/>
+            <bean class="com.cl.ytsignin.interceptor.IndexInterceptor"/>
+        </mvc:interceptor>-->
+
+        <!--普通用户页面拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <bean class="com.cl.ytsignin.interceptor.IndexInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 
     <mvc:default-servlet-handler/>
 

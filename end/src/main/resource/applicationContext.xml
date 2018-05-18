@@ -4,12 +4,12 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <context:component-scan base-package="com.cl.*"/>
+    <context:component-scan base-package="com.cl.ytsignin.*"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="jdbc:mysql://inlit.cn:3306/wxjw-test?characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/yt-signin?characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
-        <property name="password" value="sjk1230zxc"/>
+        <property name="password" value="root"/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--配置初始化大小-->
         <property name="initialSize" value="3"/>
@@ -25,7 +25,7 @@
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
     </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="typeAliasesPackage" value="com.seayon.dao.*"/>
+        <property name="typeAliasesPackage" value="com.cl.ytsignin.dao.*"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:com/cl/ytsignin/dao/mapper/*.xml"/>
     </bean>
@@ -34,7 +34,7 @@
     </bean>
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.seayon.dao.mapper"/>
+        <property name="basePackage" value="com.cl.ytsignin.dao.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->

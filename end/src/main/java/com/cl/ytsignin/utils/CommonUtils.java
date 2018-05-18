@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 /**
  * @Version 1.0
- * @author: Seayon
+ * @author: cl
  * @Date: 2018/3/28
  */
 public class CommonUtils {

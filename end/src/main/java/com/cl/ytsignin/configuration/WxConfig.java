@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WxConfig {
+	public final static String ENCRYPT_SALT = CommonUtils.getRandomString(16);
 	public final static String APPID = CommonUtils.getProperty("wechat.properties", "appid");
 	public final static String APPSERCET = CommonUtils.getProperty("wechat.properties", "appSercet");
 	public final static String WXAPP_API_CODE2SESSION = "https://api.weixin.qq.com/sns/jscode2session?appid="+APPID+"&secret="+APPSERCET;

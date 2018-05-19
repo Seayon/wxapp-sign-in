@@ -1,14 +1,13 @@
 package com.cl.ytsignin.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cl.ytsignin.controller.vo.SigneventVo;
 import com.cl.ytsignin.dao.po.Signevent;
 import com.cl.ytsignin.service.DepartService;
 import com.cl.ytsignin.service.SignEventService;
 import com.cl.ytsignin.utils.AES;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,7 +25,40 @@ public class SigneventController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
-	List<Signevent> getUserSignevent(HttpServletRequest request) throws Exception {
-		return signEventService.getSignevent(AES.Decrypt(request.getHeader("token")));
+	List<SigneventVo> getUserSignevent(HttpServletRequest request) throws Exception {
+		List<SigneventVo> signeventVoList  =signEventService.getSignevent((String) request.getSession().getAttribute("openId"));
+		return signeventVoList;
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public @ResponseBody
+	JSONObject addSignevent(HttpServletRequest request, @RequestBody Signevent signevent) {
+		JSONObject resultJSON = new JSONObject();
+		signevent.setOpenId((String) request.getSession().getAttribute("openId"));
+		if (signEventService.addSignEvent(signevent)) {
+			resultJSON.put("code", 0);
+			resultJSON.put("msg", "发起签到成功！");
+		} else {
+			resultJSON.put("code", -2);
+			resultJSON.put("msg", "操作失败");
+		}
+		return resultJSON;
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.DELETE)
+	public @ResponseBody
+	JSONObject deleteSignevent(HttpServletRequest request, @RequestBody JSONObject requestJSON) {
+		JSONObject resultJSON = new JSONObject();
+		int eventId = resultJSON.getInteger("eventId");
+		String openId = (String) request.getSession().getAttribute("openId");
+		Signevent signeventData = signEventService.getByEventId(eventId);
+		if (openId.equals(signeventData.getEventId()) && signEventService.deleteSignEvent(eventId)) {
+			resultJSON.put("code", 0);
+			resultJSON.put("msg", "发起签到成功！");
+		} else {
+			resultJSON.put("code", -2);
+			resultJSON.put("msg", "操作失败");
+		}
+		return resultJSON;
 	}
 }

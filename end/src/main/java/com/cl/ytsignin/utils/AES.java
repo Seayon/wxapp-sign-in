@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
  * @time: 0:01
  */
 public class AES {
-	private final static String sKey = "ytsigninytsignin";
+	private final static String sKey = CommonUtils.getRandomString(16);
 
 	public static String Encrypt(String sSrc) throws Exception {
 		return Encrypt(sSrc, sKey);

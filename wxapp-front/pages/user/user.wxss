@@ -1,21 +1,47 @@
 /**index.wxss**/
+page{
+  height: 100%;
+}
+.container{
+  background-color: #efeff4;
+  height: 100%;
+  justify-content: flex-start;
+}
 .userinfo {
+  padding-left: 10rpx;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  width: 100%;
+  background-color: white;
+  min-height: 130rpx;
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 110rpx;
+  height: 110rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
 
 .userinfo-nickname {
-  color: #aaa;
+  color: #000;
+  font-size: 32rpx;
 }
 
 .usermotto {
   margin-top: 200px;
+}
+.my-signEvent-wrap{
+  width: 100%;
+}
+.my-signEvent{
+  background-color: #fff;
+  margin-top: 20rpx;
+  width: 100%;
+  padding: 20rpx;
+  font-size: 24rpx;
+}
+.title{
+
 }

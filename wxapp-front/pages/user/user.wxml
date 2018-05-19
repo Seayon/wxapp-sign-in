@@ -1,13 +1,28 @@
-<!--index.wxml-->
+<!--user.wxml-->
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo"> 授权获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class='my-signEvent-wrap'>
+    <navigator url="/page/signevent/signevent?eventId={{item.eventId}}" hover-class="navigator-hover" wx:for="{{myEvent}}" class='my-signEvent'>
+    <view class='event-left'>
+      <view class='title'>
+        {{item.title}}
+      </view>
+      <view class='event-id'>
+        {{item.eventId}}
+      </view>
+      <view>
+        {{item.startTime}} - {{item.endTime}}
+      </view>
+    </view>
+    <view class='event-right'>
+
+    </view>
+    </navigator>
   </view>
 </view>

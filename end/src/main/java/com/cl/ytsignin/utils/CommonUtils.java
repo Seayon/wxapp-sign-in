@@ -4,6 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.security.InvalidKeyException;
@@ -46,8 +47,10 @@ public class CommonUtils {
 		return strBean.toString();
 
 	}
+
 	/**
 	 * 获得指定位数的随机字符串函数
+	 *
 	 * @param length
 	 * @return
 	 */
@@ -64,8 +67,9 @@ public class CommonUtils {
 
 	/**
 	 * 取出文件中的properties值
+	 *
 	 * @param propertiesFile properties文件名称
-	 * @param propertyName 需要取的值的key
+	 * @param propertyName   需要取的值的key
 	 * @return
 	 */
 	public static String getProperty(String propertiesFile, String propertyName) {
@@ -83,6 +87,7 @@ public class CommonUtils {
 
 	/**
 	 * 公众号的SHA校验使用到的
+	 *
 	 * @param a
 	 * @param b
 	 * @param c
@@ -99,6 +104,7 @@ public class CommonUtils {
 
 	/**
 	 * 根据输入的字符串获取SHA1值
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -134,7 +140,9 @@ public class CommonUtils {
 			return null;
 		}
 	}
+
 	private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
+
 	public static String genHMAC(String data, String key) {
 		byte[] result = null;
 		try {
@@ -163,6 +171,7 @@ public class CommonUtils {
 
 	/**
 	 * 计算一串字符串的MD5散列值
+	 *
 	 * @param plainText 需要计算的字符串
 	 * @return
 	 */
@@ -197,6 +206,7 @@ public class CommonUtils {
 
 	/**
 	 * 简单的正则匹配函数
+	 *
 	 * @param source
 	 * @param pat
 	 * @return
@@ -213,6 +223,7 @@ public class CommonUtils {
 
 	/**
 	 * 优化的预编译Pattern的正则匹配函数
+	 *
 	 * @param source
 	 * @param pattern
 	 * @return
@@ -228,6 +239,7 @@ public class CommonUtils {
 
 	/**
 	 * 流转字符串
+	 *
 	 * @param is
 	 * @return
 	 * @throws IOException

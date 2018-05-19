@@ -1,5 +1,6 @@
 package com.cl.ytsignin.service;
 
+import com.cl.ytsignin.controller.vo.SigneventVo;
 import com.cl.ytsignin.dao.mapper.SigneventMapper;
 import com.cl.ytsignin.dao.po.Signevent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,12 @@ import java.util.List;
 public class SignEventService {
 	@Autowired
 	SigneventMapper signeventMapper;
-	public List<Signevent> getSignevent(String openId) {
-		return signeventMapper.selectByopenId(openId);
+	public List<SigneventVo> getSignevent(String openId) {
+		return signeventMapper.selectVoByopenId(openId);
+	}
+
+	public Signevent getByEventId(int eventId) {
+		return signeventMapper.selectByPrimaryKey(eventId);
 	}
 	/**
 	 * 发起一个签到活动
@@ -41,10 +46,10 @@ public class SignEventService {
 
 	/**
 	 * 删除一个签到
-	 * @param signevent
+	 * @param eventId
 	 * @return
 	 */
-	public boolean deleteSignEvent(Signevent signevent) {
-		return signeventMapper.deleteByPrimaryKey(signevent.getEventId()) > 0 ? true : false;
+	public boolean deleteSignEvent(Integer eventId) {
+		return signeventMapper.deleteByPrimaryKey(eventId) > 0 ? true : false;
 	}
 }

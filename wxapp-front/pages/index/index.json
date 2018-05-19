@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "签到"
+  "navigationBarTitleText": "签到",
+  "navigationBarBackgroundColor": "#1296db",
+  "navigationBarTextStyle": "light"
 }

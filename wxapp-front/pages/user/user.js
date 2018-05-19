@@ -6,29 +6,9 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    myEvent:[],
+    myEvent: [],
   },
-  loadingMySign:function(){
-    wx.request({
-      url: app.globalData.apiUrl+'signevent',
-      method:'GET',
-      header:{
-        'token':app.globalData.token,
-      },
-      success:res=>{
-        console.log(res)
-      }
-    })
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    this.loadingMySign();
-
+  onGotUserInfo: function () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -52,7 +32,69 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
+        },
+        fail: res => {
+          let that = this;
+          wx.showModal({
+            title: '',
+            content: '授权后才可以更好的使用本应用，请您点击确定进行授权',
+            success: function (res) {
+              if (res.confirm) {
+                wx.openSetting({
+                  success: (res) => {
+                    if (res.authSetting["scope.userInfo"]) {
+                      wx.getUserInfo({
+                        success: res => {
+                          app.globalData.userInfo = res.userInfo;
+                          that.setData({
+                            userInfo: res.userInfo,
+                            hasUserInfo: true
+                          })
+                        }
+                      })
+                    }
+                  },
+                  fail: function (res) {
+
+                  }
+                })
+              }
+            }
+          })
         }
+      })
+    }
+  },
+  loadingMySign: function () {
+    wx.request({
+      url: app.globalData.apiUrl + 'signevent',
+      method: 'GET',
+      header: {
+        'token': app.globalData.token,
+      },
+      success: res => {
+        console.log(res)
+        this.setData({
+          myEvent:res.data,
+        })
+      }
+    })
+  },
+  //事件处理函数
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../logs/logs'
+    })
+  },
+  onShow: function () {
+
+  },
+  onLoad: function () {
+    this.loadingMySign();
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
       })
     }
   },

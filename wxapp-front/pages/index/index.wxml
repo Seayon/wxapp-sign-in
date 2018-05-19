@@ -1,5 +1,12 @@
 <!--pages/index/index.wxml-->
 <text>pages/index/index.wxml</text>
 <view>
-  这是主页
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+      <view class="weui-textarea-counter">
+        <span>0</span>/200</view>
+    </view>
+  </view>
+  
 </view>

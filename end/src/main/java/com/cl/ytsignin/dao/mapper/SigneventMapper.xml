@@ -173,6 +173,10 @@
         SELECT * FROM signevent
         WHERE openId = #{0}
     </select>
+    <select id="selectVoByopenId" resultType="com.cl.ytsignin.controller.vo.SigneventVo">
+        SELECT eventId,code,departId,endTime,startTime,title,location,intro FROM signevent
+        WHERE openId = #{0}
+    </select>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cl.ytsignin.dao.po.Signevent">
     <!--
       WARNING - @mbg.generated

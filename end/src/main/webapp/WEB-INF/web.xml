@@ -92,5 +92,7 @@ http://www.springframework.org/schema/websocket "
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <session-config>
+        <session-timeout>3</session-timeout>
+    </session-config>
 </web-app>

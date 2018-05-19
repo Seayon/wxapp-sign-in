@@ -5,7 +5,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#f7f6fb",
     "navigationBarTitleText": "羽田签到",
     "navigationBarTextStyle": "black"
   },

@@ -3,13 +3,12 @@ package com.cl.ytsignin.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cl.ytsignin.controller.vo.SigneventVo;
 import com.cl.ytsignin.dao.po.Signevent;
-import com.cl.ytsignin.service.DepartService;
 import com.cl.ytsignin.service.SignEventService;
-import com.cl.ytsignin.utils.AES;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +33,14 @@ public class SigneventController {
 	public @ResponseBody
 	JSONObject addSignevent(HttpServletRequest request, @RequestBody Signevent signevent) {
 		JSONObject resultJSON = new JSONObject();
+		//Signevent signevent = new Signevent();
+		//signevent.setCode(requestJSON.getString("code"));
+		//signevent.setDepartId(requestJSON.getInteger("departId"));
+		//signevent.setIntro(requestJSON.getString("intro"));
+		//signevent.setLocation(requestJSON.getString("location"));
+		//signevent.setTitle(requestJSON.getString("title"));
+		//signevent.setStartTime(new Date());
+		//signevent.setEndTime(new Date());
 		signevent.setOpenId((String) request.getSession().getAttribute("openId"));
 		if (signEventService.addSignEvent(signevent)) {
 			resultJSON.put("code", 0);

@@ -6,7 +6,6 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    myEvent: [],
   },
   onGotUserInfo: function () {
     if (app.globalData.userInfo) {
@@ -65,21 +64,7 @@ Page({
       })
     }
   },
-  loadingMySign: function () {
-    wx.request({
-      url: app.globalData.apiUrl + 'signevent',
-      method: 'GET',
-      header: {
-        'token': app.globalData.token,
-      },
-      success: res => {
-        console.log(res)
-        this.setData({
-          myEvent:res.data,
-        })
-      }
-    })
-  },
+
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
@@ -90,7 +75,6 @@ Page({
 
   },
   onLoad: function () {
-    this.loadingMySign();
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

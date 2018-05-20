@@ -1,0 +1,84 @@
+/* pages/addEvent/addEvent.wxss */
+
+page {
+  font-size: 32rpx;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.input-items {
+  width: 100%;
+}
+
+.container {
+}
+
+.input-item {
+  overflow: hidden;
+  margin-top: 20rpx;
+  min-height: 88rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.input-item .input-wrap {
+  font-size: 32rpx;
+  min-width: 65%;
+}
+
+.input-items text {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.input-wrap .section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.endDate {
+  margin-top: 1px;
+}
+
+.intro {
+  width: 90%;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.intro textarea {
+  width: 100%;
+}
+.depart_wrap{
+  width: 95%;
+  margin-left: 5%;
+}
+.departSelect {
+  width: 65%;
+  height: 88rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.departSelect picker{
+  width: 80%;
+  text-align: center;
+  line-height: 88rpx;
+}
+.doSubmit{
+  margin: 60rpx auto;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}

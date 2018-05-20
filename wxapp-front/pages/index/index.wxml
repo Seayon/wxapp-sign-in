@@ -1,12 +1,4 @@
-<!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+<!--viewages/index/index.wxml-->
 <view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-      <view class="weui-textarea-counter">
-        <span>0</span>/200</view>
-    </view>
-  </view>
-  
+  <button bindtap='myScanCode'>点击签到</button>
 </view>

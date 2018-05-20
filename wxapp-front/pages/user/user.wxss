@@ -1,12 +1,15 @@
 /**index.wxss**/
-page{
+
+page {
   height: 100%;
 }
-.container{
+
+.container {
   background-color: #efeff4;
   height: 100%;
   justify-content: flex-start;
 }
+
 .userinfo {
   padding-left: 10rpx;
   display: flex;
@@ -32,16 +35,29 @@ page{
 .usermotto {
   margin-top: 200px;
 }
-.my-signEvent-wrap{
-  width: 100%;
-}
-.my-signEvent{
-  background-color: #fff;
-  margin-top: 20rpx;
-  width: 100%;
-  padding: 20rpx;
-  font-size: 24rpx;
-}
-.title{
 
+.navigators {
+  width: 100%;
+  font-size: 32rpx;
+}
+
+.navigators>navigator {
+  padding-left: 5%;
+  padding-right: 5%;
+  height: 88rpx;
+  width: 90%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create_signevent {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.my_signevent {
+  border-top: 1px solid #efeff4;
 }

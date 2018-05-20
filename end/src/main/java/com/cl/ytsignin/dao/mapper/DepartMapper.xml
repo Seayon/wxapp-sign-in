@@ -18,6 +18,10 @@
     -->
     departId, name, createTime, updateTime
   </sql>
+    <select id="selectAll" resultType="com.cl.ytsignin.dao.po.Depart">
+        SELECT * FROM depart
+        limit #{0},#{1}
+    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

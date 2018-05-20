@@ -1,28 +1,33 @@
-// pages/load/load.js
+// pages/eventList/eventList.js
+const app = getApp()
 Page({
-  onGotUserInfo: function (res) {
-    if (res.userInfo != undefined) {
-      app.globalData.userInfo = res.userInfo;
-      debugger
-      wx.navigateTo({
-        url: 'pages/index/index',
-      })
-    } else {
-
-    }
+  loadingMySign: function () {
+    wx.request({
+      url: app.globalData.apiUrl + 'signevent',
+      method: 'GET',
+      header: {
+        'token': app.globalData.token,
+      },
+      success: res => {
+        console.log(res)
+        this.setData({
+          myEvent: res.data,
+        })
+      }
+    })
   },
   /**
    * 页面的初始数据
    */
   data: {
-
+    myEvent: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.loadingMySign();
   },
 
   /**

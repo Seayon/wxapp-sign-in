@@ -20,6 +20,9 @@ public class UserService {
 	@Autowired
 	DepartMapper departMapper;
 
+	public User getUser(String openId) {
+		return userMapper.selectByPrimaryKey(openId);
+	}
 	/**
 	 * 绑定原有账户，根据输入的id和名称先到库里对比，对比一样就绑定，不一样不予以绑定
 	 *

@@ -1,0 +1,31 @@
+/* pages/eventList/eventList.wxss */
+page{
+  background-color: #efefef;
+  width: 750rpx;
+}
+.my-signEvent-wrap{
+  width: 100%;
+}
+.my-signEvent{
+  background-color: #fff;
+  margin-top: 20rpx;
+  width: 93.6%;
+  padding: 24rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.event-left view{
+  padding-top: 15rpx;
+}
+.event-left{
+  width: 80%;
+}
+.event-right{
+  color: #1296db;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

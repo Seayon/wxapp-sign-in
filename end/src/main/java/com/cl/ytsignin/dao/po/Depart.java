@@ -1,5 +1,7 @@
 package com.cl.ytsignin.dao.po;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,7 @@ import java.util.Date;
  *
  * @mbg.generated do_not_delete_during_merge
  */
+@Component
 public class Depart {
     /** 部门id*/
     private Integer departId;

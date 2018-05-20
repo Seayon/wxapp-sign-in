@@ -1,4 +1,0 @@
-<!--pages/load/load.wxml-->
-<view>
-  <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">点击授权</button>
-</view>

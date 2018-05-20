@@ -1,8 +1,46 @@
 // pages/index/index.js
 const app = getApp();
+
 Page({
-  
-  getUserInfoClick:function(){
+  myScanCode: function (e) {
+    console.log("2")
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        this.setData({
+          qrResult: res.result,
+        })
+        this.doSign();
+      }
+    })
+  },
+  doSign: function () {
+    let toast = wx.showToast({
+      title: '签到中',
+      icon:'loading'
+    })
+    console.log(this.data.qrResult)
+    let result = JSON.parse(this.data.qrResult);
+    console.log(result)
+    wx.request({
+      url: app.globalData.apiUrl + 'signrecord',
+      method:'PUT',
+      data: {
+        eventId: result.eventId,
+      },
+      header: {
+        'token': app.globalData.token,
+      },
+      success:(res)=>{
+        console.log(res)
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success'
+        })
+      }
+    })
+  },
+  getUserInfoClick: function () {
     // 登录
     wx.login({
       success: res => {
@@ -47,62 +85,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    qrResult: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

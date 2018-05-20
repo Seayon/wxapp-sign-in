@@ -7,22 +7,17 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class='my-signEvent-wrap'>
-    <navigator url="/page/signevent/signevent?eventId={{item.eventId}}" hover-class="navigator-hover" wx:for="{{myEvent}}" class='my-signEvent'>
-    <view class='event-left'>
-      <view class='title'>
-        {{item.title}}
-      </view>
-      <view class='event-id'>
-        {{item.eventId}}
-      </view>
-      <view>
-        {{item.startTime}} - {{item.endTime}}
-      </view>
-    </view>
-    <view class='event-right'>
-
-    </view>
+  <view class='navigators'>
+    <navigator class='create_signevent' url='/pages/addEvent/addEvent'>
+      创建签到 <text class="iconfont icon-arrow-right-copy-copy-copy"></text>
+    </navigator>
+    <navigator class='i_signevent' url='/pages/eventList/eventList'>
+      我参与的签到 <text class="iconfont icon-arrow-right-copy-copy-copy"></text>
+    </navigator>
+    <navigator class='my_signevent' url='/pages/eventList/eventList?owner=self'>
+      我发起的签到
+      <text class="iconfont icon-arrow-right-copy-copy-copy"></text>
     </navigator>
   </view>
+
 </view>

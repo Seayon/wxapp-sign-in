@@ -1,5 +1,7 @@
 package com.cl.ytsignin.dao.po;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -23,10 +25,12 @@ public class Signevent {
     private String title;
 
     /** 签到有效开始时间*/
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /** 签到限制结束时间*/
-    private Date endTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date endTime;
 
     /** 可签到部门Id*/
     private Integer departId;

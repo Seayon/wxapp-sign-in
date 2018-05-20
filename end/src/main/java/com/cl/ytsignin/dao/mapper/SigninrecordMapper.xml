@@ -11,6 +11,10 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+    <select id="selectUnique" resultType="com.cl.ytsignin.dao.po.Signinrecord">
+        SELECT * FROM signinrecord
+        WHERE eventId =#{0} AND openId =#{1}
+    </select>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated

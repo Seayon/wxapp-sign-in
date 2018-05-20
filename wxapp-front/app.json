@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/eventList/eventList",
+    "pages/addEvent/addEvent",
+    "pages/signevent/signevent"
   ],
   "window": {
     "backgroundTextStyle": "light",

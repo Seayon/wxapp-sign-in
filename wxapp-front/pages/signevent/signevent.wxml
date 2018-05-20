@@ -1,0 +1,3 @@
+<!--pages/signevent/signevent.wxml-->
+<text>pages/signevent/signevent.wxml</text>
+<canvas class='canvas' canvas-id='canvas' bindlongtap='save'></canvas>

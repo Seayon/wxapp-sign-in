@@ -1,0 +1,54 @@
+<view class='container'>
+  <view class='input-items'>
+    <view class='input-item'>
+      <text>活动名称：</text>
+      <view class='input-wrap'>
+        <input bindinput='bindTitleInput' placeholder="点此输入名称" focus='{{titleFocus}}' name='title' value='{{title}}' bindconfirm="confirmTitle" confirm-type='next' confirm-hold='true' />
+      </view>
+
+    </view>
+    <view class='input-item intro'>
+      <textarea bindinput='bindIntroInput' placeholder='点此输入活动介绍' focus='{{introFocus}}' auto-height='true' name='intro' value='{{intro}}'></textarea>
+    </view>
+    <view class='input-item'>
+      <text>开始时间：</text>
+      <view class='input-wrap'>
+        <view class="section">
+          <picker mode="date" value="{{startDate}}" bindchange="bindstartDateChange">
+            {{startDate}}
+          </picker>
+
+          <picker mode="time" value="{{startTime}}" bindchange="bindstartTimeChange">
+            {{startTime}}
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='input-item endDate'>
+      <text>结束时间：</text>
+      <view class='input-wrap'>
+        <view class="section">
+          <picker mode="date" value="{{endDate}}" bindchange="bindendDateChange">
+            {{endDate}}
+          </picker>
+          <picker mode="time" value="{{endTime}}" bindchange="bindendTimeChange">
+            {{endTime}}
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class='input-item'>
+      <text>部门签到：</text>
+      <view class='departSelect'>
+        <switch bindchange="limitDepartChange" />
+        <picker wx:if="{{limit}}" mode="selector" bindchange="bindPickerChange" range-key='name' range="{{departList}}">
+          {{departId==null?'点击选择部门':departList[departId].name}}
+        </picker>
+      </view>
+    </view>
+    <view class='doSubmit'>
+      <button bindtap='submit'>发起签到</button>
+    </view>
+  </view>
+</view>

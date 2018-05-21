@@ -1,10 +1,23 @@
 //app.js
 App({
+
+  getUser:function(){
+    wx.request({
+      url: this.globalData.apiUrl+'user',
+      header: {
+        'token': this.globalData.token,
+      },
+      success:res=>{
+        this.globalData.user = res.data;
+      },
+    })
+  },
+  
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
@@ -17,6 +30,7 @@ App({
           success:res=>{
             console.log(res)
             this.globalData.token = res.data.token;
+            this.getUser();
           },
           fail:res=>{
             
@@ -47,6 +61,7 @@ App({
     
   },
   globalData: {
+    user:null,
     userInfo: null,
     apiUrl:"http://we.t.inlit.cn/",
     token:null,

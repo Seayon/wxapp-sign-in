@@ -1,20 +1,25 @@
 <!--user.wxml-->
 <view class="container">
   <view class="userinfo">
+    <view class='userinfo-left'>
     <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo"> 授权获取头像昵称 </button>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
+    </view>
+    <navigator url='/pages/setting/setting' class='setting' wx:if="{{hasUserInfo}}">
+      <text class='iconfont icon-shezhi'></text>
+    </navigator>
   </view>
   <view class='navigators'>
     <navigator class='create_signevent' url='/pages/addEvent/addEvent'>
       创建签到 <text class="iconfont icon-arrow-right-copy-copy-copy"></text>
     </navigator>
-    <navigator class='i_signevent' url='/pages/eventList/eventList'>
+    <navigator class='i_signevent' url='/pages/eventList/eventList?owner=self'>
       我参与的签到 <text class="iconfont icon-arrow-right-copy-copy-copy"></text>
     </navigator>
-    <navigator class='my_signevent' url='/pages/eventList/eventList?owner=self'>
+    <navigator class='my_signevent' url='/pages/eventList/eventList'>
       我发起的签到
       <text class="iconfont icon-arrow-right-copy-copy-copy"></text>
     </navigator>

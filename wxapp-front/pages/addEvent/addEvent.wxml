@@ -39,11 +39,11 @@
     </view>
 
     <view class='input-item'>
-      <text>部门签到：</text>
+      <text>班级签到：</text>
       <view class='departSelect'>
         <switch bindchange="limitDepartChange" />
-        <picker wx:if="{{limit}}" mode="selector" bindchange="bindPickerChange" range-key='name' range="{{departList}}">
-          {{departId==null?'点击选择部门':departList[departId].name}}
+        <picker wx:if="{{limit}}" mode="selector" bindchange="bindPickerChange" value='clazzNo' range="{{clazzNoList}}">
+          {{clazzNo==null?'点击选择班级':clazzNoList[clazzNo]}}
         </picker>
       </view>
     </view>

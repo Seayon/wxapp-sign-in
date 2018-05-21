@@ -3,10 +3,12 @@ const app = getApp();
 
 Page({
   myScanCode: function (e) {
-    console.log("2")
+    
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
+        console.log("'扫码得到的数据：'+")
+        console.log(res)
         this.setData({
           qrResult: res.result,
         })

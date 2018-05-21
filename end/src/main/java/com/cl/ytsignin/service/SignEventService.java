@@ -20,6 +20,9 @@ public class SignEventService {
 	public List<SigneventVo> getSignevent(String openId) {
 		return signeventMapper.selectVoByopenId(openId);
 	}
+	public List<SigneventVo> getSigneventUserIn(String openId) {
+		return signeventMapper.selectVoUserIn(openId);
+	}
 
 	public Signevent getByEventId(int eventId) {
 		return signeventMapper.selectByPrimaryKey(eventId);

@@ -1,22 +1,18 @@
 package com.cl.ytsignin.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.cl.ytsignin.controller.vo.SigneventVo;
 import com.cl.ytsignin.dao.mapper.SigneventMapper;
 import com.cl.ytsignin.dao.mapper.SigninrecordMapper;
+import com.cl.ytsignin.dao.mapper.UserMapper;
 import com.cl.ytsignin.dao.po.Signevent;
 import com.cl.ytsignin.dao.po.Signinrecord;
 import com.cl.ytsignin.dao.po.User;
-import com.cl.ytsignin.service.SignEventService;
-import com.cl.ytsignin.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * @Version 1.0
@@ -31,20 +27,20 @@ public class SignRecordController {
 	@Autowired
 	SigneventMapper signeventMapper;
 	@Autowired
-	UserService userService;
+	UserMapper userMapper;
 
 	@ApiOperation(value = "添加一个签到记录")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public @ResponseBody
 	JSONObject addSignRecord(@RequestBody JSONObject requestJSON,HttpServletRequest request) {
 		Integer eventId = requestJSON.getInteger("eventId");
-		Signevent signevent = signeventMapper.selectByPrimaryKey(eventId);
-
 		String openId = (String) request.getSession().getAttribute("openId");
-		User user = userService.getUser(openId);
+		Signevent signevent = signeventMapper.selectByPrimaryKey(eventId);
+		User user = userMapper.selectByOpenId(openId);
 		JSONObject resultJSON = new JSONObject();
 		//需要完善签到时候的鉴权，需不需要限定部门签到之类
-		if (signevent!=null&&signevent.getDepartId() != null && signevent.getDepartId().equals(user.getDepartId())) {
+		//TODO
+		if (signevent!=null&&signevent.getClazzNo() != null && signevent.getClazzNo().equals(user.getClazzNo())) {
 			resultJSON.put("code", -4);
 			resultJSON.put("msg", "您无权限签到");
 		} else {

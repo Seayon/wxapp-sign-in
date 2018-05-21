@@ -61,3 +61,21 @@ page {
 .my_signevent {
   border-top: 1px solid #efeff4;
 }
+
+.userinfo-left {
+  width: 80%;
+  padding-left: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  min-height: 130rpx;
+}
+
+.setting {
+  width: 20%;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

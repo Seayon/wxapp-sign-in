@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.cl.ytsignin.controller.vo.SigneventVo;
 import com.cl.ytsignin.dao.po.Signevent;
 import com.cl.ytsignin.service.SignEventService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,10 +24,19 @@ public class SigneventController {
 	@Autowired
 	SignEventService signEventService;
 
+	@ApiOperation(value = "获取当前登陆发起的签到")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
 	List<SigneventVo> getUserSignevent(HttpServletRequest request) throws Exception {
-		List<SigneventVo> signeventVoList  =signEventService.getSignevent((String) request.getSession().getAttribute("openId"));
+		List<SigneventVo> signeventVoList = signEventService.getSignevent((String) request.getSession().getAttribute("openId"));
+		return signeventVoList;
+	}
+
+	@ApiOperation(value = "获取当前登陆参与的签到")
+	@RequestMapping(value = "/userIn", method = RequestMethod.GET)
+	public @ResponseBody
+	List<SigneventVo> getSigneventUserIn(HttpServletRequest request) throws Exception {
+		List<SigneventVo> signeventVoList = signEventService.getSigneventUserIn((String) request.getSession().getAttribute("openId"));
 		return signeventVoList;
 	}
 
@@ -33,14 +44,6 @@ public class SigneventController {
 	public @ResponseBody
 	JSONObject addSignevent(HttpServletRequest request, @RequestBody Signevent signevent) {
 		JSONObject resultJSON = new JSONObject();
-		//Signevent signevent = new Signevent();
-		//signevent.setCode(requestJSON.getString("code"));
-		//signevent.setDepartId(requestJSON.getInteger("departId"));
-		//signevent.setIntro(requestJSON.getString("intro"));
-		//signevent.setLocation(requestJSON.getString("location"));
-		//signevent.setTitle(requestJSON.getString("title"));
-		//signevent.setStartTime(new Date());
-		//signevent.setEndTime(new Date());
 		signevent.setOpenId((String) request.getSession().getAttribute("openId"));
 		if (signEventService.addSignEvent(signevent)) {
 			resultJSON.put("code", 0);

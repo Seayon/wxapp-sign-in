@@ -1,7 +1,11 @@
 package com.cl.ytsignin.dao.mapper;
 
+import com.cl.ytsignin.controller.vo.SigneventVo;
+import com.cl.ytsignin.dao.po.Signevent;
 import com.cl.ytsignin.dao.po.Signinrecord;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public interface SigninrecordMapper {

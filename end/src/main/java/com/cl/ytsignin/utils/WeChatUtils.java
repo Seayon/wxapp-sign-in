@@ -87,27 +87,34 @@ public class WeChatUtils {
 	public static String getQr(String eventId) {
 		ResponseBody responseBody = null;
 		RequestBody requestBody = RequestBody.create(JSON, "{\n" +
-				"\t\"scene\": 4701,\n" +
-				"\t\"page\": \"pages/index/index\",\n" +
+				"\t\"path\": \"pages/index/index?eventId=4701\",\n" +
 				"\t\"width\": 430,\n" +
 				"\t\"auto_color\": true,\n" +
-				"\t\"line_color\": \"{\\\"r\\\":\\\"0\\\",\\\"g\\\":\\\"0\\\",\\\"b\\\":\\\"0\\\"}\",\n" +
+				"\t\"line_color\": {\n" +
+				"\t\t\"r\": \"0\",\n" +
+				"\t\t\"g\": \"0\",\n" +
+				"\t\t\"b\": \"0\"\n" +
+				"\t},\n" +
 				"\t\"is_hyaline\": false\n" +
 				"}");
 		Request request = new Request.Builder()
-				.url("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + getAccessToken())
+				.url("https://api.weixin.qq.com/wxa/getwxacode?access_token=" + getAccessToken())
 				.post(requestBody)
 				.build();
 		OkHttpClient okHttpClient = new OkHttpClient();
 		try {
 			responseBody = okHttpClient.newCall(request).execute().body();
-			System.out.println(responseBody.string());
+			CommonUtils.saveImageFromStream("E://", "4701.png", responseBody.byteStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
 	public static void main(String[] args){
+		System.setProperty("http.proxyHost", "127.0.0.1");
+		System.setProperty("https.proxyHost", "127.0.0.1");
+		System.setProperty("http.proxyPort", "8888");
+		System.setProperty("https.proxyPort", "8888");
 		getQr("2");
 	}
 }

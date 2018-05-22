@@ -1,0 +1,26 @@
+/* pages/signevent/signevent.wxss */
+page{
+  height: 100%;
+}
+.container{
+  width: 100%;
+}
+.qrcode{
+  width: 80%;
+  height: 600rpx;
+}
+.canvas{
+  margin: 0 auto;
+  width: 90%;
+  min-height: 90%;
+}
+.qrcode{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  justify-content: flex-start;
+}

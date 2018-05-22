@@ -13,7 +13,7 @@
       </view>
     </view>
     <view class='event-right'>
-      <text class='iconfont icon-rightarrow'></text>
+      <text class='iconfont icon-07jiantouxiangyoufill'></text>
     </view>
   </navigator>
 </view>

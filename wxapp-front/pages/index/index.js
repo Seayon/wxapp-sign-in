@@ -3,11 +3,9 @@ const app = getApp();
 
 Page({
   myScanCode: function (e) {
-    
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
-        console.log("'扫码得到的数据：'+")
         console.log(res)
         this.setData({
           qrResult: res.result,
@@ -17,30 +15,103 @@ Page({
     })
   },
   doSign: function () {
-    let toast = wx.showToast({
-      title: '签到中',
-      icon:'loading'
-    })
     console.log(this.data.qrResult)
-    let result = JSON.parse(this.data.qrResult);
-    console.log(result)
+    let result;
+    try {
+      result = JSON.parse(this.data.qrResult);
+    } catch (e) {
+      wx.showToast({
+        title: '无法识别二维码',
+        image: '/resource/error.png',
+      })
+      return;
+    }
+
+    
+    // 先获取一下该签到活动的信息,判断签到活动是否存在
     wx.request({
-      url: app.globalData.apiUrl + 'signrecord',
-      method:'PUT',
-      data: {
-        eventId: result.eventId,
-      },
+      url: app.globalData.apiUrl + 'signevent/' + result.eventId,
+      method: 'GET',
       header: {
         'token': app.globalData.token,
       },
-      success:(res)=>{
-        console.log(res)
-        wx.showToast({
-          title: res.data.msg,
-          icon: 'success'
+      success: res => {
+        this.setData({
+          event: res.data,
+        })
+        if (this.data.event.eventId == null) {
+          wx.showToast({
+            title: '签到活动不存在',
+            image: '/resource/error.png',
+          })
+          return;
+        }
+        if (app.globalData.user.name == null) {
+          wx.navigateTo({
+            url: '/pages/setting/setting',
+          })
+          return;
+        }
+        // 然后判断当前是否符合签到班级和时间等
+        let timeNow = new Date();
+        debugger
+        if (timeNow < this.data.event.startTime) {
+          wx.showToast({
+            title: '签到未开始',
+            image: '/resource/error.png',
+          })
+          return;
+        }
+        if (timeNow > this.data.event.endTime) {
+          wx.showToast({
+            title: '签到时间已过',
+            image: '/resource/error.png',
+          })
+          return;
+        }
+        let clazzNo = this.data.event.clazzNo;
+        if (clazzNo != null && clazzNo != app.globalData.user.clazzNo) {
+          wx.showToast({
+            title: '您无权限签到',
+            image: '/resource/error.png',
+          })
+          return;
+        }
+        let toast = wx.showToast({
+          title: '签到中',
+          icon: 'loading'
+        })
+        console.log(result)
+        wx.request({
+          url: app.globalData.apiUrl + 'signrecord',
+          method: 'PUT',
+          data: {
+            eventId: result.eventId,
+          },
+          header: {
+            'token': app.globalData.token,
+          },
+          success: (res) => {
+            console.log(res)
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'success'
+              })
+            } else {
+              wx.showToast({
+                title: res.data.msg,
+                image: '/resource/error.png'
+              })
+            }
+
+          }
         })
       }
     })
+
+
+
   },
   getUserInfoClick: function () {
     // 登录
@@ -88,6 +159,7 @@ Page({
    */
   data: {
     qrResult: null,
+    event: null,
   },
 
   /**

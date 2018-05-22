@@ -1,49 +1,45 @@
-// pages/eventList/eventList.js
-const app = getApp()
+// pages/setting/setting.js
+const app = getApp();
 Page({
-  loadingMySign: function () {
-    let url = 'signevent';
-    if(this.data.userIn){
-      url ='signevent/userIn',
-      wx.setNavigationBarTitle({
-        title: '我参与的签到'
+  doSubmit:function(e){
+      wx.request({
+        url: '',
       })
-    }
-    wx.request({
-      url: app.globalData.apiUrl + url,
-      method: 'GET',
-      header: {
-        'token': app.globalData.token,
-      },
-      success: res => {
-        console.log(res)
-        this.setData({
-          myEvent: res.data,
-        })
-      }
+  },
+  radioChange:function(e){
+    let userSex = 'user.sex';
+    this.setData({
+      [userSex]:e.detail.value,
     })
+  },
+  bindNameInput: function (e) {
+    let userName = 'user.name';
+    this.setData({
+      [userName]: e.detail.value,
+    })
+    console.log(e.detail.value)
+  },
+  bindDepartInput: function (e) {
+    let departName = 'user.departName';
+    this.setData({
+      [departName]: e.detail.value,
+    })
+    console.log(this.data.user)
   },
   /**
    * 页面的初始数据
    */
   data: {
-    myEvent: [],
-    userIn:false,
+    user: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    console.log(options)
-    
-    if (options.owner!=null){
-      this.setData({
-        userIn:true,
-      })
-    }
-    this.loadingMySign();
+    this.setData({
+      user: app.globalData.user,
+    })
   },
 
   /**

@@ -1,49 +1,30 @@
-// pages/eventList/eventList.js
-const app = getApp()
+// pages/signevent/signevent.js
+var QRCode = require('../../utils/weapp-qrcode.js')
+
 Page({
-  loadingMySign: function () {
-    let url = 'signevent';
-    if(this.data.userIn){
-      url ='signevent/userIn',
-      wx.setNavigationBarTitle({
-        title: '我参与的签到'
-      })
-    }
-    wx.request({
-      url: app.globalData.apiUrl + url,
-      method: 'GET',
-      header: {
-        'token': app.globalData.token,
-      },
-      success: res => {
-        console.log(res)
-        this.setData({
-          myEvent: res.data,
-        })
-      }
-    })
-  },
+
   /**
    * 页面的初始数据
    */
   data: {
-    myEvent: [],
-    userIn:false,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.eventId)
     
-    console.log(options)
-    
-    if (options.owner!=null){
-      this.setData({
-        userIn:true,
-      })
-    }
-    this.loadingMySign();
+    var qrcode = new QRCode('canvas', {
+      text: "{\"eventId\":"+options.eventId+",\"code\":\"22\"}",
+      width: 220,
+      height: 220,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+
   },
 
   /**

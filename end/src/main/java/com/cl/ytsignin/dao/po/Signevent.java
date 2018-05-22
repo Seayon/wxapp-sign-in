@@ -1,5 +1,7 @@
 package com.cl.ytsignin.dao.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -20,9 +22,11 @@ public class Signevent {
     private String title;
 
     /** 签到有效开始时间*/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date startTime;
 
     /** 签到限制结束时间*/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date endTime;
 
     /** 可选参数，签到班级编号*/

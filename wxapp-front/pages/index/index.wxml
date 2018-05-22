@@ -1,4 +1,4 @@
 <!--viewages/index/index.wxml-->
-<view>
-  <button bindtap='myScanCode'>点击签到</button>
+<view class='container'>
+  <button bindtap='myScanCode'>扫码签到</button>
 </view>

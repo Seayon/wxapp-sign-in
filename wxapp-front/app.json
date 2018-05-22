@@ -5,9 +5,9 @@
     "pages/user/user",
     "pages/eventList/eventList",
     "pages/addEvent/addEvent",
-    "pages/signevent/signevent",
-    "pages/bindAccount/bindAccount",
-    "pages/setting/setting"
+    "pages/signeventQR/signeventQR",
+    "pages/setting/setting",
+    "pages/signevent/signevent"
   ],
   "window": {
     "backgroundTextStyle": "light",

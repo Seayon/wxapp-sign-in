@@ -1,14 +1,36 @@
 package com.cl.ytsignin.dao.mapper;
 
 import com.cl.ytsignin.controller.vo.SigneventVo;
+import com.cl.ytsignin.controller.vo.SignrecordVo;
+import com.cl.ytsignin.controller.vo.StudentNoneSignrecordVo;
 import com.cl.ytsignin.dao.po.Signevent;
 import com.cl.ytsignin.dao.po.Signinrecord;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public interface SigninrecordMapper {
+	/**
+	 * 根据活动id查询已经签到的人员嗯
+	 * @param eventId
+	 * @return
+	 */
+	List<StudentNoneSignrecordVo> selectSignUser(Integer eventId);
+	/**
+	 * 根据班级编号和签到活动编号查询没有签到的学生
+	 * @param eventId
+	 * @param clazzNo
+	 * @return
+	 */
+	List<StudentNoneSignrecordVo> selectNoneSignStudent(Integer eventId, String clazzNo);
+	/**
+	 * 根据活动查询
+	 * @param eventId
+	 * @return
+	 */
+	List<SignrecordVo> selectByEventId(Integer eventId);
 	/**
 	 * 根据活动id和openId查询记录
 	 * @param eventId

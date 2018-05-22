@@ -8,12 +8,12 @@
     </select>
     <select id="selectVoByopenId" resultType="com.cl.ytsignin.controller.vo.SigneventVo">
         SELECT eventId,title,intro,startTime,endTime,clazzNo,location FROM signevent
-        WHERE openId = #{0}
+        WHERE openId = #{0} ORDER BY eventId DESC
     </select>
     <!--联表查询用户参与的签到-->
     <select id="selectVoUserIn" resultType="com.cl.ytsignin.controller.vo.SigneventVo">
         SELECT signevent.eventId,title,intro,startTime,endTime,clazzNo,location FROM signevent,signinrecord
-        WHERE signinrecord.openId = #{0} AND signevent.eventId = signinrecord.eventId
+        WHERE signinrecord.openId = #{0} AND signevent.eventId = signinrecord.eventId ORDER BY signinrecord.createTime DESC
     </select>
   <resultMap id="BaseResultMap" type="com.cl.ytsignin.dao.po.Signevent">
     <!--

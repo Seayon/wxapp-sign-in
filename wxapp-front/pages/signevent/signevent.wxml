@@ -1,3 +1,48 @@
 <!--pages/signevent/signevent.wxml-->
-<text>pages/signevent/signevent.wxml</text>
-<canvas class='canvas' canvas-id='canvas' bindlongtap='save'></canvas>
+<view class='container'>
+  <view class='eventInfo'>
+    <view class='title'>
+      {{event.title}}
+    </view>
+
+    <view class='eventInfo-item'>
+      <text class='iconfont icon-shizhong'></text>
+      <text>{{event.startTime}}</text>
+    </view>
+    <view class='eventInfo-item'>
+      <text class='iconfont icon-zhi'></text>
+      <text>{{event.endTime}}</text>
+    </view>
+    <view class='eventInfo-item'>
+      <text class='iconfont icon-ren'></text>
+      <text>{{signUser.length}}人已经签到</text>
+    </view>
+
+    <view class='eventInfo-item'>
+      <text class='iconfont icon-id'></text>
+      <text>{{event.eventId}}</text>
+    </view>
+
+    <view class='eventInfo-item' wx:if="{{event.clazzNo!=null}}">
+      <text class='iconfont icon-Lock'></text>
+      <text>{{event.clazzNo}}</text>
+    </view>
+
+    <view class='eventInfo-item'>
+      <text class='iconfont icon-erweima'></text>
+      <navigator url="/pages/signeventQR/signeventQR?eventId={{eventId}}" hover-class="navigator-hover" class='my-signEvent'>
+        查看签到二维码
+      </navigator>
+    </view>
+  </view>
+  <view class='user-list'>
+    <view class='user-item' wx:for="{{signUser}}">
+      <text class='iconfont icon-dian1 signed'></text>
+      <text> {{item.name}} {{item.sex}} {{item.sID}}</text>
+    </view>
+    <view class='user-item' wx:for="{{noneSignStudent}}">
+      <text class='iconfont icon-dian1 un-signed'></text>
+      <text> {{item.name}} {{item.sex}} {{item.sID}}</text>
+    </view>
+  </view>
+</view>

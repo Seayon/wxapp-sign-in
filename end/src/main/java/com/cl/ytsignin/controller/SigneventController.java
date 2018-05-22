@@ -2,6 +2,7 @@ package com.cl.ytsignin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cl.ytsignin.controller.vo.SigneventVo;
+import com.cl.ytsignin.dao.mapper.SigneventMapper;
 import com.cl.ytsignin.dao.po.Signevent;
 import com.cl.ytsignin.service.SignEventService;
 import io.swagger.annotations.Api;
@@ -23,7 +24,8 @@ import java.util.List;
 public class SigneventController {
 	@Autowired
 	SignEventService signEventService;
-
+	@Autowired
+	SigneventMapper signeventMapper;
 	@ApiOperation(value = "获取当前登陆发起的签到")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
@@ -54,7 +56,12 @@ public class SigneventController {
 		}
 		return resultJSON;
 	}
-
+	@ApiOperation(value = "查询一个签到活动记录")
+	@RequestMapping(value = "{eventId}",method = RequestMethod.GET)
+	public @ResponseBody
+	Signevent getSignevent(@PathVariable(value = "eventId")Integer eventId) {
+		return signeventMapper.selectByPrimaryKey(eventId);
+	}
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
 	public @ResponseBody
 	JSONObject deleteSignevent(HttpServletRequest request, @RequestBody JSONObject requestJSON) {

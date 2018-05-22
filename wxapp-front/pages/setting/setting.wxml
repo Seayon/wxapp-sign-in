@@ -1,0 +1,29 @@
+<view class='container'>
+  <view class='input-items'>
+    <view class='input-item'>
+      <text>姓名</text>
+      <input bindinput='bindNameInput' placeholder="点击输入姓名" value='{{user.name}}' name='title' bindconfirm="confirmTitle" confirm-type='next' confirm-hold='true' />
+    </view>
+    <view class='input-item'>
+      <text>性别</text>
+      <radio-group bindchange="radioChange">
+        <radio value='男' checked="{{user.sex=='男'?'checked':''}}">男</radio>
+        <radio value='女' checked="{{user.sex=='女'?'checked':''}}">女</radio>
+      </radio-group>
+    </view>
+
+    <view class='input-item' wx:if="{{user.sID!=null||studentTag==true}}">
+      <text>学号</text>
+      <input bindinput='bindsIDInput' placeholder="点此输入学号" value='{{user.sID}}' name='title' bindconfirm="confirmTitle" confirm-type='newwxt' confirm-hold='true' />
+    </view>
+    <view class='input-item' wx:if="{{user.sID!=null||studentTag==true}}">
+      <text>班级</text>
+      <input bindinput='bindDepartInput' placeholder="点此输入班级编号" value='{{user.clazzNo}}' name='title' bindconfirm="confirmTitle" confirm-type='next' confirm-hold='true' />
+    </view>
+    
+  </view>
+  <view class='submit'>
+    <button bindtap='doSubmit'>提交</button>
+  </view>
+  <text bindtap='switchBindsID'>绑定学号</text>
+</view>

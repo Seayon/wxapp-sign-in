@@ -27,7 +27,7 @@ Page({
       })
       return false;
     }
-
+    // TODO 需要完成日期开始不能大于结束的判断
     let toast = wx.showToast({
       title: '提交中',
       icon:'loading'
@@ -40,7 +40,7 @@ Page({
       },
       data: {
         code: this.data.code,
-        departId: this.data.departId,
+        clazzNo: this.data.clazzNoList[this.data.clazzNo],
         title: this.data.title,
         intro: this.data.intro,
         startTime: this.data.startDate + 'T' + this.data.startTime + ':00.000+0800',
@@ -67,22 +67,22 @@ Page({
   },
   bindPickerChange: function (e) {
     this.setData({
-      departId: e.detail.value,
+      clazzNo: e.detail.value,
     })
   },
   limitDepartChange: function (e) {
     if (e.detail.value == false) {
       this.setData({
-        departId: null,
+        clazzNo: null,
       })
     }
     this.setData({
       limit: e.detail.value,
     })
   },
-  loadingDepart: function (e) {
+  loadingClazz: function (e) {
     wx.request({
-      url: app.globalData.apiUrl + 'depart',
+      url: app.globalData.apiUrl + 'user/clazzNo',
       method: 'GET',
       header: {
         'token': app.globalData.token,
@@ -90,7 +90,7 @@ Page({
       success: res => {
         console.log(res.data)
         this.setData({
-          departList: res.data,
+          clazzNoList: res.data,
         })
       }
     })
@@ -122,8 +122,8 @@ Page({
     titleFocus: true,
     introFocus: false,
     limit: false,
-    departList: [],
-    departId: null,
+    clazzNoList: [],
+    clazzNo: null,
     startDate: util.formatDate(new Date),
     endDate: util.formatDate(new Date),
     startTime: util.formatTime(new Date),
@@ -134,7 +134,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadingDepart()
+    this.loadingClazz()
 
   },
 

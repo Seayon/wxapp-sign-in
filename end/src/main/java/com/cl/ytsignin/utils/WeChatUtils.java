@@ -110,11 +110,20 @@ public class WeChatUtils {
 		}
 		return "";
 	}
+
+	public static String getUserInfo(String openId) {
+		Request request = new Request.Builder()
+				.url("https://api.weixin.qq.com/cgi-bin/user/info?access_token="+getAccessToken()+"&openid="+openId+"&lang=zh_CN")
+				.build();
+		OkHttpClient okHttpClient = new OkHttpClient();
+		try {
+			System.out.println(okHttpClient.newCall(request).execute().body().string());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 	public static void main(String[] args){
-		System.setProperty("http.proxyHost", "127.0.0.1");
-		System.setProperty("https.proxyHost", "127.0.0.1");
-		System.setProperty("http.proxyPort", "8888");
-		System.setProperty("https.proxyPort", "8888");
-		getQr("2");
+		getUserInfo("oA7eG5F1DCF7vW_OnRK5p0B7chHo");
 	}
 }

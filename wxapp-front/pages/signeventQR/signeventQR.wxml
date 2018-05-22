@@ -1,0 +1,10 @@
+<!--pages/signevent/signevent.wxml-->
+<view class='container'>
+  <view>
+   请打开小程序后扫码签到
+  </view>
+  <view class='qrcode'>
+    <canvas class='canvas' canvas-id='canvas' bindlongtap='save'></canvas>
+  </view>
+
+</view>

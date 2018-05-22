@@ -2,8 +2,12 @@ package com.cl.ytsignin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cl.ytsignin.controller.vo.UserVo;
+import com.cl.ytsignin.controller.vo.WxuserVo;
 import com.cl.ytsignin.dao.mapper.UserMapper;
+import com.cl.ytsignin.dao.mapper.WxuserMapper;
 import com.cl.ytsignin.dao.po.User;
+import com.cl.ytsignin.dao.po.Wxuser;
+import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +29,7 @@ public class UserController {
 	@RequestMapping(value = "/student", method = RequestMethod.PUT)
 	public @ResponseBody
 	JSONObject bindStudent(@RequestBody JSONObject requestJSON, HttpServletRequest request) {
+
 		JSONObject resultJSON = new JSONObject();
 		String name = requestJSON.getString("name");
 		String sID = requestJSON.getString("sID");
@@ -89,5 +94,33 @@ public class UserController {
 	public @ResponseBody
 	List<String> getAllClazz() {
 		return userMapper.selectAllClazz();
+	}
+
+	@Autowired
+	WxuserMapper wxuserMapper;
+
+	@RequestMapping(value = "wxUser", method = RequestMethod.PUT)
+	public @ResponseBody
+	JSONObject saveWxUser(@RequestBody WxuserVo wxuserVo, HttpServletRequest request) {
+		JSONObject resultJSON = new JSONObject();
+		String openId = (String) request.getSession().getAttribute("openId");
+		Wxuser wxuser = new Wxuser();
+		wxuser.setAvataUrl(wxuserVo.getAvataUrl());
+		wxuser.setCity(wxuserVo.getCity());
+		wxuser.setCountry(wxuserVo.getCountry());
+		wxuser.setGender(wxuserVo.getGender());
+		wxuser.setLanguage(wxuserVo.getLanguage());
+		wxuser.setNickName(wxuserVo.getNickName());
+		wxuser.setProvince(wxuserVo.getProvince());
+		wxuser.setOpenId(openId);
+		int a = wxuserMapper.insert(wxuser);
+		if (a > 0) {
+			resultJSON.put("code", 0);
+			resultJSON.put("msg", "执行成功");
+		} else {
+			resultJSON.put("code", -3);
+			resultJSON.put("msg", "操作失败");
+		}
+		return resultJSON;
 	}
 }

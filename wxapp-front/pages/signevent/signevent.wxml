@@ -36,13 +36,13 @@
     </view>
   </view>
   <view class='user-list'>
-    <view class='user-item' wx:for="{{signUser}}">
+    <view class='user-item' wx:for="{{signUser}}" wx:key="{{index}}">
       <text class='iconfont icon-dian1 signed'></text>
-      <text> {{item.name}} {{item.sex}} {{item.sID}}</text>
+      <text> {{item.name}} {{item.sex}} {{event.clazzNo==null?'':item.sID}}</text>
     </view>
-    <view class='user-item' wx:for="{{noneSignStudent}}">
+    <view class='user-item' wx:for="{{noneSignStudent}}" wx:key="{{index}}">
       <text class='iconfont icon-dian1 un-signed'></text>
-      <text> {{item.name}} {{item.sex}} {{item.sID}}</text>
+      <text> {{item.name}} {{item.sex}} {{event.clazzNo==null?'':item.sID}}</text>
     </view>
   </view>
 </view>

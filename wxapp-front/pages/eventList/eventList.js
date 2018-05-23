@@ -3,11 +3,11 @@ const app = getApp()
 Page({
   loadingMySign: function () {
     let url = 'signevent';
-    if(this.data.userIn){
-      url ='signevent/userIn',
-      wx.setNavigationBarTitle({
-        title: '我参与的签到'
-      })
+    if (this.data.userIn) {
+      url = 'signevent/userIn',
+        wx.setNavigationBarTitle({
+          title: '我参与的签到'
+        })
     }
     wx.request({
       url: app.globalData.apiUrl + url,
@@ -28,22 +28,19 @@ Page({
    */
   data: {
     myEvent: [],
-    userIn:false,
+    userIn: false,
+    nonerecord:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    console.log(options)
-    
-    if (options.owner!=null){
+    if (options.owner != null) {
       this.setData({
-        userIn:true,
+        userIn: true,
       })
     }
-    this.loadingMySign();
   },
 
   /**
@@ -57,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.loadingMySign();
   },
 
   /**

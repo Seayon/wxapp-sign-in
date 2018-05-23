@@ -8,7 +8,7 @@
     <name>WxJW2 Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <build>
-        <finalName>WxJW2</finalName>
+        <finalName>YT-SignWxApp</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

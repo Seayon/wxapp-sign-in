@@ -11,6 +11,11 @@
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+    <delete id="deleteByOpenIdWithLock">
+        DELETE FROM signinrecord
+        WHERE openId = #{0}
+        AND eventId in (SELECT eventId FROM signevent WHERE clazzNo is not null)
+    </delete>
     <select id="selectSignUser" resultType="com.cl.ytsignin.controller.vo.StudentNoneSignrecordVo">
       SELECT user.id,user.name,user.sex,user.clazzNo,user.sID,signinrecord.createTime
         FROM user,signinrecord,signevent

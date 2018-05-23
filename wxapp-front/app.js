@@ -79,7 +79,8 @@ App({
   globalData: {
     user:null,
     userInfo: null,
-    apiUrl:"http://we.t.inlit.cn/",
+    apiUrl:"https://yt.inlit.cn/",
+    // apiUrl: "http://we.t.inlit.cn/",
     token:null,
   }
 })

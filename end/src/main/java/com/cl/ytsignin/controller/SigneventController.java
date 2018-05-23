@@ -26,6 +26,7 @@ public class SigneventController {
 	SignEventService signEventService;
 	@Autowired
 	SigneventMapper signeventMapper;
+
 	@ApiOperation(value = "获取当前登陆发起的签到")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
@@ -56,26 +57,30 @@ public class SigneventController {
 		}
 		return resultJSON;
 	}
+
 	@ApiOperation(value = "查询一个签到活动记录")
-	@RequestMapping(value = "{eventId}",method = RequestMethod.GET)
+	@RequestMapping(value = "{eventId}", method = RequestMethod.GET)
 	public @ResponseBody
-	Signevent getSignevent(@PathVariable(value = "eventId")Integer eventId) {
+	Signevent getSignevent(@PathVariable(value = "eventId") Integer eventId) {
 		return signeventMapper.selectByPrimaryKey(eventId);
 	}
-	@RequestMapping(value = "", method = RequestMethod.DELETE)
+
+	@RequestMapping(value = "{eventId}", method = RequestMethod.DELETE)
 	public @ResponseBody
-	JSONObject deleteSignevent(HttpServletRequest request, @RequestBody JSONObject requestJSON) {
+	JSONObject deleteSignevent(HttpServletRequest request, @PathVariable(value = "eventId")Integer eventId) {
 		JSONObject resultJSON = new JSONObject();
-		int eventId = resultJSON.getInteger("eventId");
 		String openId = (String) request.getSession().getAttribute("openId");
 		Signevent signeventData = signEventService.getByEventId(eventId);
-		if (openId.equals(signeventData.getEventId()) && signEventService.deleteSignEvent(eventId)) {
+
+		if (openId.equals(signeventData.getOpenId()) && signEventService.deleteSignEvent(eventId)) {
 			resultJSON.put("code", 0);
-			resultJSON.put("msg", "发起签到成功！");
+			resultJSON.put("msg", "删除成功！");
 		} else {
 			resultJSON.put("code", -2);
 			resultJSON.put("msg", "操作失败");
 		}
 		return resultJSON;
 	}
+
+
 }

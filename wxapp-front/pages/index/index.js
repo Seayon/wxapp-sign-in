@@ -54,7 +54,6 @@ Page({
         }
         // 然后判断当前是否符合签到班级和时间等
         let timeNow = new Date();
-        debugger
         if (timeNow < this.data.event.startTime) {
           wx.showToast({
             title: '签到未开始',

@@ -43,16 +43,28 @@ Page({
         clazzNo: this.data.clazzNoList[this.data.clazzNo],
         title: this.data.title,
         intro: this.data.intro,
-        startTime: this.data.startDate + 'T' + this.data.startTime + ':00.000+0800',
-        endTime: this.data.endDate + 'T' + this.data.endTime + ':00.000+0800',
+        startTime: this.data.startDate  +' '+ this.data.startTime,
+        endTime: this.data.endDate  + ' '+this.data.endTime,
         location: this.data.location,
       },
       success:res=>{
-        toast = wx.showToast({
-          title: res.data.msg,
-          icon:'success'
-        })
-
+        if(res.data.code==0){
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'success'
+          })
+          setTimeout(function () {
+            wx.navigateTo({
+              url: '/pages/eventList/eventList',
+            })
+          }, 1100)
+        }else{
+          wx.showToast({
+            title: res.data.msg,
+            duration:1500,
+            image: '/resource/error.png'
+          })
+        }
       },
       complete:res=>{
         

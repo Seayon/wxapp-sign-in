@@ -13,6 +13,12 @@ import java.util.List;
 @Component
 public interface SigninrecordMapper {
 	/**
+	 * 删除某openId下的所有限定班级的签到记录
+	 * @param openId
+	 * @return
+	 */
+	int deleteByOpenIdWithLock(String openId);
+	/**
 	 * 根据活动id查询已经签到的人员嗯
 	 * @param eventId
 	 * @return

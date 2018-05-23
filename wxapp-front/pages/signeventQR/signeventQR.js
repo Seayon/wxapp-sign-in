@@ -2,29 +2,38 @@
 var QRCode = require('../../utils/weapp-qrcode.js')
 
 Page({
-
+  
   /**
    * 页面的初始数据
    */
   data: {
-
+    width:200,
+    height:200,
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log(options.eventId)
-    
+  setSize:function(){
+    let windowwidth = wx.getSystemInfoSync().windowWidth;
+    let targetWidth = windowwidth*0.6;
+    this.setData({
+      width: targetWidth,
+      height: targetWidth
+    })
+  },
+  loadQR: function (eventId){
     var qrcode = new QRCode('canvas', {
-      text: "{\"eventId\":"+options.eventId+",\"code\":\"22\"}",
-      width: 220,
-      height: 220,
+      text: "{\"eventId\":" + eventId + ",\"code\":\"22\"}",
+      width: this.data.width,
+      height: this.data.height,
       colorDark: "#000000",
       colorLight: "#ffffff",
       correctLevel: QRCode.CorrectLevel.H,
     });
-
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setSize();
+    this.loadQR(options.eventId);
   },
 
   /**

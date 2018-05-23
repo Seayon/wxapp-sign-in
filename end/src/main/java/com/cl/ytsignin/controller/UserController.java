@@ -3,6 +3,7 @@ package com.cl.ytsignin.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cl.ytsignin.controller.vo.UserVo;
 import com.cl.ytsignin.controller.vo.WxuserVo;
+import com.cl.ytsignin.dao.mapper.SigninrecordMapper;
 import com.cl.ytsignin.dao.mapper.UserMapper;
 import com.cl.ytsignin.dao.mapper.WxuserMapper;
 import com.cl.ytsignin.dao.po.User;
@@ -55,6 +56,8 @@ public class UserController {
 		return resultJSON;
 	}
 
+	@Autowired
+	SigninrecordMapper signinrecordMapper;
 
 	@RequestMapping(value = "/info", method = RequestMethod.PUT)
 	public @ResponseBody
@@ -64,6 +67,8 @@ public class UserController {
 		String name = requsetJSON.getString("name");
 		String sex = requsetJSON.getString("sex");
 		userMapper.unBindOpenId(openId);
+		//当学生重新绑定为普通人的时候，需要把它之前的签到信息给删除
+		signinrecordMapper.deleteByOpenIdWithLock(openId);
 		//如果该openId已经存入的有信息，就更新
 		User user = new User();
 		user.setType(1);

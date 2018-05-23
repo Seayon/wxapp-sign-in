@@ -1,15 +1,23 @@
 <!--pages/eventList/eventList.wxml-->
 <view class='my-signEvent-wrap'>
-  <navigator url="/pages/signevent/signevent?eventId={{item.eventId}}" hover-class="navigator-hover" wx:for="{{myEvent}}" class='my-signEvent' wx:key="{{index}}">
+  <view class='nonerecord' wx:if="{{myEvent.length==0}}">
+    <text>无记录</text>
+    <text class='iconfont icon-kong'></text>
+  </view>
+  <navigator url="/pages/signevent/signevent?eventId={{item.eventId}}&owner={{userIn}}" hover-class="navigator-hover" wx:for="{{myEvent}}" class='my-signEvent' wx:key="{{index}}">
     <view class='event-left'>
       <view class='title'>
-        {{item.title}}
+        <text class='iconfont icon-biaoti'></text>
+        <text>{{item.title}}</text>
+
       </view>
       <view class='event-id'>
-        {{item.eventId}}
+        <text class='iconfont icon-id'></text>
+        <text>{{item.eventId}}</text>
       </view>
       <view>
-        {{item.startTime}} - {{item.endTime}}
+        <text class='iconfont icon-shizhong'></text>
+        <text>{{item.startTime}} - {{item.endTime}}</text>
       </view>
     </view>
     <view class='event-right'>

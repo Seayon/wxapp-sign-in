@@ -2,7 +2,35 @@
 const util = require('../../utils/util.js');
 const app = getApp();
 Page({
-
+  deleteEvent: function () {
+    let that = this;
+    wx.showModal({
+      title: '删除活动',
+      content: '删除后将无法恢复，确认删除？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.apiUrl + 'signevent/' + that.data.eventId,
+            method: 'DELETE',
+            header: {
+              'token': app.globalData.token,
+            },
+            success: res => {
+              if (res.data.code == 0) {
+                wx.navigateBack({})
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  duration:1500,
+                  image: '/resource/error.png'
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  },
   loadingEvent: function () {
     wx.request({
       url: app.globalData.apiUrl + 'signevent/' + this.data.eventId,
@@ -66,6 +94,7 @@ Page({
     noneSignStudent: [],
     event: null,
     eventId: null,
+    owner: false,
   },
 
   /**
@@ -74,7 +103,9 @@ Page({
   onLoad: function (options) {
     this.setData({
       eventId: options.eventId,
+      owner: options.owner,
     })
+    console.log(this.data.owner)
     this.loadingEvent();
   },
 

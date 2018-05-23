@@ -34,6 +34,12 @@
         查看签到二维码
       </navigator>
     </view>
+    <view class='delete_wrap' wx:if="{{!(owner=='true')}}">
+      <text class='iconfont icon-shanchu' bindtap='deleteEvent'></text>      
+    </view>
+  </view>
+  <view>
+  
   </view>
   <view class='user-list'>
     <view class='user-item' wx:for="{{signUser}}" wx:key="{{index}}">

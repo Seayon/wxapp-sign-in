@@ -21,7 +21,7 @@ import java.io.PrintWriter;
  * 普通用户页面的拦截器，需要openId来访问
  */
 public class IndexInterceptor extends HandlerInterceptorAdapter {
-	private final static JSONObject UNAUTHORIZATION = new JSONObject();
+	public final static JSONObject UNAUTHORIZATION = new JSONObject();
 	private final static JSONObject TOKEN_TIMEOUT = new JSONObject();
 	private final static Logger logger = Logger.getLogger(IndexInterceptor.class);
 

@@ -136,8 +136,8 @@ Page({
     limit: false,
     clazzNoList: [],
     clazzNo: null,
-    startDate: util.formatDate(new Date),
-    endDate: util.formatDate(new Date),
+    startDate: null,
+    endDate: null,
     startTime: util.formatTime(new Date),
     endTime: util.formatTime(new Date(new Date().getTime() + 180000))
   },
@@ -161,6 +161,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      startDate:util.formatDate(new Date),
+      endDate: util.formatDate(new Date),
+    })
     this.getCode();
   },
 

@@ -25,15 +25,12 @@
     </bean>-->
 
     <mvc:interceptors>
-     <!--   <mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
-            &lt;!&ndash;管理员的不拦截页面&ndash;&gt;
+            <!--管理员的不拦截页面-->
             <mvc:exclude-mapping path="/admin/login"/>
-            <mvc:exclude-mapping path="/admin/Auth"/>
-            <mvc:exclude-mapping path="/resource/**"/>
-            <mvc:exclude-mapping path="/**/**.if"/>
-            <bean class="com.cl.ytsignin.interceptor.IndexInterceptor"/>
-        </mvc:interceptor>-->
+            <bean class="com.cl.ytsignin.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
 
         <!--普通用户页面拦截器-->
         <mvc:interceptor>

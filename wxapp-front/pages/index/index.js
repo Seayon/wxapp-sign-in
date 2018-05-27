@@ -27,7 +27,7 @@ Page({
       return;
     }
 
-    
+
     // 先获取一下该签到活动的信息,判断签到活动是否存在
     wx.request({
       url: app.globalData.apiUrl + 'signevent/' + result.eventId,
@@ -95,8 +95,15 @@ Page({
             if (res.data.code == 0) {
               wx.showToast({
                 title: res.data.msg,
-                icon: 'success'
+                icon: 'success',
+                duration:1500,
               })
+              setTimeout(function () {
+                wx.navigateTo({
+                  url: '/pages/signevent/signevent?eventId=' + result.eventId + '&owner=userIn',
+                })
+              }, 1100)
+             
             } else {
               wx.showToast({
                 title: res.data.msg,

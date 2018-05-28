@@ -1,6 +1,8 @@
 package com.cl.ytsignin.interceptor;
 
 
+import com.cl.ytsignin.dao.po.Admin;
+import com.cl.ytsignin.dao.po.User;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -22,6 +24,11 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		if (httpSession.getAttribute("admin") != null) {
 			return true;
 		} else {
+			//Admin admin = new Admin();
+			//admin.setUsername("admin");
+			//admin.setPassword("123");
+			//httpSession.setAttribute("admin", admin);
+			//return true;
 			response.setContentType("application/json; charset=utf-8");
 			PrintWriter printWriter = response.getWriter();
 			printWriter.write(IndexInterceptor.UNAUTHORIZATION.toJSONString());

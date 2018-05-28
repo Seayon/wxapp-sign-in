@@ -165,6 +165,9 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectByLimit" resultType="com.cl.ytsignin.dao.po.User">
+        SELECT * FROM user WHERE sID is not NULL limit #{0},#{1}
+    </select>
     <select id="selectAllClazz" resultType="java.lang.String">
         SELECT  DISTINCT clazzNo FROM USER WHERE clazzNo is not null
     </select>

@@ -3,6 +3,7 @@ package com.cl.ytsignin.controller.admin;
 import com.alibaba.fastjson.JSONObject;
 import com.cl.ytsignin.configuration.WxConfig;
 import com.cl.ytsignin.dao.mapper.AdminMapper;
+import com.cl.ytsignin.dao.mapper.UserMapper;
 import com.cl.ytsignin.dao.po.Admin;
 import com.cl.ytsignin.dao.po.User;
 import com.cl.ytsignin.utils.AES;
@@ -24,7 +25,6 @@ import java.util.List;
 public class AdminLoginController {
 	@Autowired
 	AdminMapper adminMapper;
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public @ResponseBody
 	JSONObject getToken(@RequestBody JSONObject jsonObject, HttpServletRequest request) throws Exception {
@@ -41,13 +41,5 @@ public class AdminLoginController {
 			responseJSON.put("msg", "身份校验失败");
 		}
 		return responseJSON;
-	}
-
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public @ResponseBody
-	List<User> listUser() {
-		List<User> userList = new ArrayList<>();
-
-		return userList;
 	}
 }

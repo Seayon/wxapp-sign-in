@@ -9,6 +9,13 @@ import java.util.List;
 @Component
 public interface UserMapper {
 	/**
+	 * 分页查询
+	 * @param start
+	 * @param size
+	 * @return
+	 */
+	List<User> selectByLimit(Integer start, Integer size);
+	/**
 	 * 查询所有班级编号
 	 */
 	List<String> selectAllClazz();

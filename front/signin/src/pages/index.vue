@@ -132,6 +132,7 @@
 <style scoped>
   .container {
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   .alert-success{
     margin-top: 20px;

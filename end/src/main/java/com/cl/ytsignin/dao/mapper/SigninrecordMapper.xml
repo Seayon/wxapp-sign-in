@@ -17,14 +17,14 @@
         AND eventId in (SELECT eventId FROM signevent WHERE clazzNo is not null)
     </delete>
     <select id="selectSignUser" resultType="com.cl.ytsignin.controller.vo.StudentNoneSignrecordVo">
-      SELECT user.id,user.name,user.sex,user.clazzNo,user.sID,signinrecord.createTime
+      SELECT DISTINCT user.id,user.name,user.sex,user.clazzNo,user.sID,signinrecord.createTime
         FROM user,signinrecord,signevent
         WHERE signevent.eventId = signinrecord.eventId
         AND signinrecord.openId = user.openId
         AND signinrecord.eventId =#{0}
     </select>
     <select id="selectNoneSignStudent" resultType="com.cl.ytsignin.controller.vo.StudentNoneSignrecordVo">
-        SELECT user.id,user.name,user.sex,user.clazzNo,user.sID
+        SELECT DISTINCT user.id,user.name,user.sex,user.clazzNo,user.sID
         FROM user,signevent
         WHERE signevent.clazzNo =#{1}
         AND user.clazzNo =#{1}
